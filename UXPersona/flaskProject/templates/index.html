@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+
+    body {
+        background-image: url('/static/black-walpaper2.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+
+.button {
+  background-color: #f4511e;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+.button:hover {opacity: 1}
+
+
+</style>
+    <script>
+      redirect  = function() { window.location.href = "/"; }; // fonksiyonu değişken olarak tanımladım. Bu da bir fonksiyon tanımlama çeşididir.
+    </script>
+</head>
+
+<body>
+<div class="container">
+
+<form action="{{ url_for('hello')}}" method="post" style="margin-top: 10px">
+    <input type="hidden" name="aAroundSmall" value="{{age1}}">
+    <input type="hidden" name="aAroundBig" value="{{age2}}">
+    <input type="hidden" name="comp_select" value="{{gender}}">
+    <input type="hidden" name="eCount" value="{{humanCount}}">
+    <button type="submit" class="button">Reflesh</button>
+    <button type="button" class="button" onClick="redirect();" >Back To Filter</button>
+
+</form>
+
+
+<p>{{tables}}</p>
+<div  class="row row-cols-1 row-cols-md-2 g-4">
+{% for item in items %}
+
+<div class="col">
+  <div class="card h-100"  style="background-color: #CFB997;">
+    <div class="card-body">
+        <div class="row">
+        <div class="col-md-5" style="margin-top: 30px;">
+      <img src={{item["image_path"]}} alt="photo" width="230" height="230" style="border-radius: 10px">
+    </div>
+    <div class="col-md-6">
+        <p class="card-text"><strong>Name</strong>:  {{item["Name"]}}</p>
+        <p class="card-text"><strong>Age</strong>:{{item["Age"]}}</p>
+        <p class="card-text"><strong>Gender</strong>:  {{item["Gender"]}}</p>
+        <p class="card-text"><strong>Job</strong>:  {{item["job"]}}</p>
+        <p class="card-text"><strong>City</strong>:  {{item["city"]}}</p>
+        <p class="card-text"><strong>Goals And Needs</strong>:  {{item["Goals And Needs"]}}</p>
+        <p class="card-text"><strong>Relevant Patterns</strong>: {{item["Relevant Patterns"]}}</p>
+        <p class="card-text"><strong>Pain Points</strong>:  {{item["Pain Points"]}}</p>
+    </div>
+            </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+</div>
+</div>
+
+</body>
+</html>
